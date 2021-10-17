@@ -1,0 +1,16 @@
+.Sun,
+.Sat {
+  background-color: #92bde3;
+}
+.U,
+.GU,
+.u,
+.gu {
+  background-color: aliceblue !important;
+}
+.SU,
+.su,
+.last {
+  background-color: rgb(235, 74, 25) !important;
+  color: white;
+}

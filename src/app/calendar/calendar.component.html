@@ -1,0 +1,42 @@
+<div class="container-fluid p-3">
+  <h2>
+    Calendar
+    <span style="float:right" class="btn btn-lg btn-info">
+      <i class="fa fa-chevron-left" (click)="getPrevMonth()"></i>
+      {{ currMonth | date: 'MMMM' }}
+      <i class="fa fa-chevron-right" (click)="getNextMonth()"></i>
+    </span>
+  </h2>
+  <br />
+  <table class="table table-bordered">
+    <tbody>
+      <tr *ngFor="let snap of snapData; last as last">
+        <td>{{ snap?.title | titlecase }}</td>
+        <td *ngFor="let date of dateArray; index as i" class="text-center" [class.last]="!!last && i == 3">
+          <ng-container *ngIf="i == 0">{{ snap?.code }}</ng-container>
+          <ng-container *ngIf="i == 3">{{ snap?.value }}</ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <td>Employee Name</td>
+        <td *ngFor="let date of dateArray">
+          {{ date | date: 'dd' }}
+          <br />
+          {{ date | date: 'E' }}
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employeeLeaves">
+        <td>{{ emp?.name | titlecase }}</td>
+        <td *ngFor="let date of dateArray" class="{{ date | date: 'E' }} {{ emp[date | date: 'dd'] }}">
+          {{ emp[date | date: 'dd'] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
