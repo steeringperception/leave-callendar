@@ -24,17 +24,17 @@
       <tr>
         <td>Employee Name</td>
         <td *ngFor="let date of dateArray">
-          {{ date | date: 'dd' }}
+          {{ date.date }}
           <br />
-          {{ date | date: 'E' }}
+          {{ date.day }}
         </td>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let emp of employeeLeaves">
         <td>{{ emp?.name | titlecase }}</td>
-        <td *ngFor="let date of dateArray" class="{{ date | date: 'E' }} {{ emp[date | date: 'dd'] }}">
-          {{ emp[date | date: 'dd'] }}
+        <td *ngFor="let date of dateArray" class="{{date.day}} {{ emp[date.date] }}">
+          {{ emp[date.date] }}
         </td>
       </tr>
     </tbody>

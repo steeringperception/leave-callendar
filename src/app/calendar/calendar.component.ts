@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,15 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class CalendarComponent implements OnInit {
   currMonth: Date = new Date();
   lastDateOfMonth = 0;
-  dateArray: Date[] = [];
-
+  dateArray: any[] = [];
   snapData: any[] = [];
-
   employeeLeaves: any[] = [];
 
   snapView: any = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit() {
     this.getCurrMonth();
@@ -56,9 +58,11 @@ export class CalendarComponent implements OnInit {
     this.lastDateOfMonth = lastDay.getDate();
     this.dateArray = [];
     for (let i = 1; i <= this.lastDateOfMonth; i++) {
+      let d = new Date(this.currMonth.getFullYear(), this.currMonth.getMonth(), i)
       this.dateArray.push(
-        new Date(this.currMonth.getFullYear(), this.currMonth.getMonth(), i)
+        { day: this.datePipe.transform(d, 'E'), date: this.datePipe.transform(d, 'dd') }
       );
     }
+    console.log(this.dateArray)
   }
 }
